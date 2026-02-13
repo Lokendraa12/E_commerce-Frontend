@@ -20,7 +20,7 @@ export default function Orders() {
 
   const fetchOrders = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/orders/${user.id}`);
+      const res = await axios.get(`${process.env.REACT_APP_API_URL}/orders/${user.id}`);
       setOrders(res.data);
     } catch (error) {
       console.error("Error fetching orders", error);

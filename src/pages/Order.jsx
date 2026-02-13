@@ -31,7 +31,8 @@ export default function Orders() {
     if (!window.confirm("Are you sure you want to cancel this order?")) return;
 
     try {
-      const res = await axios.put(`http://localhost:5000/api/orders/cancel/${id}`);
+      // const res = await axios.put(`http://localhost:5000/api/orders/cancel/${id}`);
+      const res = await axios.put(`${process.env.REACT_APP_API_URL}/orders/cancel/${id}`);
       const updatedOrder = res.data.order;
       setOrders((prevOrders) =>
         prevOrders.map((order) => (order._id === id ? updatedOrder : order))
@@ -46,7 +47,8 @@ export default function Orders() {
     if (!window.confirm("Are you sure you want to delete this order?")) return;
 
     try {
-      const res = await axios.delete(`http://localhost:5000/api/orders/${id}`);
+      // const res = await axios.delete(`http://localhost:5000/api/orders/${id}`);
+      const res = await axios.delete(`${process.env.REACT_APP_API_URL}/orders/${id}`);
       setOrders(prevOrders => prevOrders.filter(order => order._id !== id));
       alert(res.data.message);
     } catch (error) {

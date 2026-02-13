@@ -1,0 +1,215 @@
+:root{
+  --primary:#0f172a;
+  --accent:#06b6d4;
+  --muted:#6b7280;
+}
+*{box-sizing:border-box}
+body{font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin:0; color:#111; background:#f7fafc;}
+
+nav.topbar{background:var(--primary); color:rgb(20, 19, 19); padding:12px 16px; display:flex; align-items:center; justify-content:space-between;}
+nav .links{display:flex; gap:12px; align-items:center;}
+a.brand{font-weight:700; color:rgb(0, 0, 0); text-decoration:none; margin-right:12px;}
+a, button { font-family:inherit; }
+a.navlink{color:rgb(2, 2, 2); text-decoration:none; opacity:0.95; }
+.nav-right{display:flex; gap:10px; align-items:center;}
+.btn{padding:8px 12px; border-radius:6px; border:none; cursor:pointer;}
+.btn-primary{background:var(--accent); color:#002; border: none;}
+.card{background:white; border-radius:8px; padding:12px; box-shadow:0 1px 4px rgba(2,6,23,0.06);}
+.grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:12px;}
+.product-img{width:100%; height:180px; object-fit:cover; border-radius:6px; background:#eee;}
+.product-title{font-size:16px; margin:8px 0;}
+.small{font-size:13px; color:var(--muted);}
+.form{max-width:420px; margin:12px 0;}
+.input{width:100%; padding:10px; margin:8px 0; border-radius:6px; border:1px solid #e5e7eb;}
+@media (max-width:900px){ .grid-3{grid-template-columns:repeat(2,1fr);} }
+@media (max-width:600px){ .grid-3{grid-template-columns:1fr;} nav .links{display:none} }
+/* Navbar container */
+.navbar {
+  height: 70px;
+  background: #fcf9f9;
+  padding: 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  
+}
+
+/* Left side */
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.brand {
+  font-size: 24px;
+  font-weight: 700;
+  color: #00eaff;
+  text-decoration: none;
+}
+.navbar-right{
+  display: flex;
+  gap: 12px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 18px;
+}
+
+.navlink {
+  color: #ddd;
+  text-decoration: none;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.navlink:hover {
+  color: #a76c98;
+}
+
+/* Cart */
+.cart-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.badge {
+  background: #ff3b3b;
+  padding: 2px 8px;
+  border-radius: 12px;
+  color: white;
+  font-size: 12px;
+}
+
+/* Profile area */
+.profile-area {
+  position: relative;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.profile img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #00eaff;
+}
+
+.profile-menu {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  width: 180px;
+  z-index: 11000;        /* navbar se bhi zyada */
+  background: #211f1f;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  border-radius: 8px;
+}
+
+
+.menu-item {
+  padding: 10px 16px;
+  display: block;
+  color: white;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.menu-item:hover {
+  background: #444;
+}
+
+.logout-btn {
+  width: 100%;
+  border: none;
+  text-align: left;
+  background: transparent;
+  cursor: pointer;
+  color: #ff6565;
+}
+
+.logout-btn:hover {
+  background: #440000;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+/* SEARCH BAR CONTAINER */
+.search-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+/* DESKTOP SEARCH BAR */
+.search-bar {
+  display: flex;
+  align-items: center;
+  background: #ead2d2;
+  padding: 8px 14px;
+  border-radius: 10px;
+  transition: 0.3s ease;
+}
+
+.search-bar input {
+  border: none;
+  outline: none;
+  background: transparent;
+  width: 500px;
+  font-size: 14px;
+}
+
+.search-bar button {
+  display: flex;
+  justify-content: end;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 18px;
+  color: #08326b;
+}
+
+/* 🔹 MOBILE RESPONSIVE (icon only, expands on click) */
+@media (max-width: 768px) {
+
+  .search-bar {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    justify-content: center;
+    border-radius: 50%;
+  }
+
+  .search-bar input {
+    width: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s;
+  }
+
+  /* When search bar is active, expand input */
+  .search-bar.active {
+    width: 180px;
+    padding: 0 14px;
+    border-radius: 30px;
+  }
+
+  .search-bar.active input {
+    width: 100%;
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+

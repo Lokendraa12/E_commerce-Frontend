@@ -1,0 +1,107 @@
+/* PAGE */
+.register-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  position: relative;
+  font-family: Arial, sans-serif;
+}
+
+/* OVERLAY */
+.register-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+/* CARD */
+.register-card {
+  position: relative;
+  z-index: 1;
+  width: 380px;
+  padding: 36px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+  text-align: center;
+}
+
+/* LOGO */
+.register-logo {
+  width: 95px;
+  margin-bottom: 10px;
+}
+
+/* TEXT */
+.register-card h2 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #555;
+  margin-top: 6px;
+}
+
+/* FORM */
+.register-card form {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.register-card input {
+  padding: 13px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  outline: none;
+}
+
+.register-card button {
+  margin-top: 8px;
+  padding: 13px;
+  border-radius: 8px;
+  border: none;
+  background: #111;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* FOOTER */
+.bottom-text {
+  margin-top: 14px;
+  font-size: 14px;
+}
+
+.bottom-text a {
+  color: #0f4c81;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* 📱 MOBILE FIX — NO BACKGROUND */
+@media (max-width: 768px) {
+  .register-page {
+    background: white !important;
+  }
+
+  .register-overlay {
+    display: none !important;
+  }
+
+  .register-card {
+    width: 100%;
+    min-height: 100vh;
+    border-radius: 0;
+    box-shadow: none;
+    padding-top: 60px;
+  }
+}

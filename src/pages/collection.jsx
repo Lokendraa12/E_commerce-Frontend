@@ -10,12 +10,15 @@ const COLLECTIONS = [
   { name: "Premium Innerwear", tagline: "Ultimate Comfort" },
 ];
 
+const BASE = process.env.REACT_APP_API_URL;
+
 const API_MAP = {
-  "T-Shirts": "http://localhost:5000/api/tshirts",
-  "Shirts": "http://localhost:5000/api/shirts",
-  "Jeans": "http://localhost:5000/api/jeans",
-  "Premium Innerwear": "http://localhost:5000/api/innerwear",
+  "T-Shirts": `${BASE}/tshirts`,
+  "Shirts": `${BASE}/shirts`,
+  "Jeans": `${BASE}/jeans`,
+  "Premium Innerwear": `${BASE}/innerwear`,
 };
+
 
 export default function Collections() {
   const navigate = useNavigate();

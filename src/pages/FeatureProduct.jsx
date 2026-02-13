@@ -19,23 +19,25 @@ export default function FeaturedProducts() {
       : text;
   };
 
-  // 🔹 Fetch featured products
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const res = await fetch(
-          `http://localhost:5000/api/features?type=${activeTab}`
-        );
-        const data = await res.json();
-        setProducts(data);
-        setIndex(0); // reset slider on tab change
-      } catch (err) {
-        console.error(err);
-      }
-    };
+  const BASE = process.env.REACT_APP_API_URL;
 
-    fetchProducts();
-  }, [activeTab]);
+useEffect(() => {
+  const fetchProducts = async () => {
+    try {
+      const res = await fetch(
+        `${BASE}/features?type=${activeTab}`
+      );
+      const data = await res.json();
+      setProducts(data);
+      setIndex(0);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  fetchProducts();
+}, [activeTab]);
+
 
   // 🔹 Responsive
   useEffect(() => {

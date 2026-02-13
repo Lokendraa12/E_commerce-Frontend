@@ -9,6 +9,8 @@ export default function Navbar() {
     const { user, logout } = useContext(AuthContext);
     const [showMenu, setShowMenu] = useState(false);
     const [searchText, setSearchText] = useState("");
+    const [showMobileSearch, setShowMobileSearch] = useState(false);
+
     const nav = useNavigate();
 
     const doLogout = () => {
@@ -67,22 +69,19 @@ export default function Navbar() {
 
                     {/* Profile */}
                     {user ? (
-                        <div className="profile-area">
-                            <div
-                                className="profile"
-                                onClick={() => setShowMenu(!showMenu)}
-                            >
-                                <img src={user.avatar || "/avatar.png"} alt="profile" />
-                            </div>
+                         <div className="profile-area">
+    <div className="profile">
+      <img src={user.avatar || "/avatar.png"} alt="profile" />
+    </div>
 
-                            {showMenu && (
-                                <div className="profile-menu">
-                                    <Link to="/profile" className="menu-item">My Profile</Link>
-                                    <Link to="/orders" className="menu-item">My Orders</Link>
-                                    <button onClick={doLogout} className="menu-item logout-btn">Logout</button>
-                                </div>
-                            )}
-                        </div>
+    <div className="profile-menu">
+      <Link to="/profile" className="menu-item">My Profile</Link>
+      <Link to="/orders" className="menu-item">My Orders</Link>
+      <button onClick={doLogout} className="menu-item logout-btn">
+        Logout
+      </button>
+    </div>
+  </div>
                     ) : (
                         <>
                             <Link to="/login" className="navlink">Login</Link>

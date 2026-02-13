@@ -1,212 +1,261 @@
 @import url("https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css");
 
-/* .wow-navbar {
-  background: linear-gradient(90deg, #1b2b4a, #243b6b);
-  padding: 10px;
-} */
+/* ================= NAVBAR ================= */
 
-
+.wow-navbar {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
 
 .wow-nav-inner {
-  /* max-width: 1300px; */
   margin: auto;
-  padding: 0 20px;
-  height: 90px;
+  padding: 0 40px;
+  height: 80px;
   display: flex;
   align-items: center;
-  gap: 25px;
+  gap: 30px;
 }
 
-
-/* LOGO */
-.wow-logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-}
+/* ================= LOGO ================= */
 
 .wow-logo img {
-  height: 190px;
-  display: block;
+  height: 120px;
+  transition: 0.3s ease;
 }
 
-
-.wow-logo span {
-  color: #4ec3ff;
-  font-weight: 800;
-  font-size: 18px;
+.wow-logo img:hover {
+  transform: scale(1.05);
 }
 
-/* LINKS */
-.wow-links {
-  display: flex;
-  gap: 20px;
-}
+/* ================= LINKS ================= */
 
 .wow-links a {
-  color: #171212;
+  color: #333;
   text-decoration: none;
   font-weight: 500;
-  opacity: 0.9;
+  position: relative;
+  padding: 5px 0;
 }
 
-.wow-links a:hover {
-  opacity: 1;
+.wow-links a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background: #1749b2;
+  transition: 0.3s;
 }
 
-/* SEARCH */
+.wow-links a:hover::after {
+  width: 100%;
+}
+
+/* ================= SEARCH ================= */
+
 .wow-search {
   flex: 1;
   max-width: 480px;
   margin: 0 auto;
   display: flex;
-  background: #ffffff;
-  border-radius: 30px;
+  background: #f5f7fb;
+  border-radius: 50px;
   overflow: hidden;
+  transition: 0.3s;
 }
 
+.wow-search:focus-within {
+  box-shadow: 0 0 0 3px rgba(23,73,178,0.15);
+}
 
 .wow-search input {
   flex: 1;
   border: none;
-  padding: 10px 15px;
+  padding: 12px 18px;
   outline: none;
+  background: transparent;
 }
 
 .wow-search button {
-  background: #43a2d8;
+  background: #1749b2;
   border: none;
-  padding: 0 16px;
-  color: rgb(14, 10, 10);
+  padding: 0 18px;
+  color: #fff;
   font-size: 18px;
   cursor: pointer;
+  transition: 0.3s;
 }
 
-/* PROFILE */
-.wow-profile {
-  margin-left: auto;
+.wow-search button:hover {
+  background: #0f357f;
 }
 
-.wow-profile img {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  border: 2px solid #2bb0ff;
-}
+/* ================= RIGHT SECTION ================= */
+
 .right-section {
-    display: flex;
-    align-items: center;
-    gap: 18px;
+  display: flex;
+  align-items: center;
+  gap: 25px;
 }
+
+/* ================= CART ================= */
 
 .cart-icon {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #222;
+  position: relative;
+  color: #333;
+  transition: 0.3s;
+}
+
+.cart-icon:hover {
+  transform: translateY(-2px);
 }
 
 .cart-icon svg {
-    width: 26px;
-    height: 26px;
+  width: 26px;
+  height: 26px;
 }
 
-/* 🔴 Cart Count Badge */
 .cart-badge {
-    position: absolute;
-    top: -6px;
-    right: -8px;
-    min-width: 18px;
-    height: 18px;
-    padding: 0 5px;
-
-    background: #ff3f6c; /* Myntra/Amazon red */
-    color: #fff;
-
-    font-size: 11px;
-    font-weight: 600;
-
-    border-radius: 999px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  position: absolute;
+  top: -6px;
+  right: -10px;
+  min-width: 20px;
+  height: 20px;
+  background: #ff3f6c;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.25);
 }
 
+/* ================= PROFILE ================= */
 
-/* ================= MOBILE RESPONSIVE ================= */
+.profile-area {
+  position: relative;
+  cursor: pointer;
+}
+
+.profile img {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #eaeaea;
+  transition: 0.3s ease;
+}
+
+.profile img:hover {
+  border-color: #1749b2;
+  transform: scale(1.05);
+}
+
+/* ================= DROPDOWN ================= */
+
+.profile-menu {
+  position: absolute;
+  top: 130%;
+  right: 0;
+  width: 210px;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 12px 0;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(15px);
+  transition: all 0.3s ease;
+}
+
+/* Hover open */
+.profile-area:hover .profile-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Dropdown Arrow */
+.profile-menu::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  right: 20px;
+  width: 14px;
+  height: 14px;
+  background: white;
+  transform: rotate(45deg);
+  box-shadow: -2px -2px 6px rgba(0,0,0,0.02);
+}
+
+/* ================= MENU ITEMS ================= */
+
+.menu-item {
+  display: block;
+  padding: 12px 22px;
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+  transition: 0.25s ease;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+}
+
+.menu-item:hover {
+  background: #f3f6fd;
+  color: #7390cd;
+  padding-left: 26px;
+}
+
+/* Logout Special */
+.logout-btn {
+  color: #e63946;
+}
+
+.logout-btn:hover {
+  background: #fff1f1;
+}
+
+/* ================= MOBILE ================= */
 
 @media (max-width: 768px) {
 
   .wow-nav-inner {
-    height: auto;
     flex-wrap: wrap;
-    padding: 10px 12px;
-    gap: 12px;
+    height: auto;
+    padding: 10px 15px;
+    gap: 15px;
   }
 
-  /* Logo */
   .wow-logo img {
-    height: 95px;
+    height: 80px;
   }
 
-  /* Hide center links */
   .wow-links {
     display: none;
   }
 
-  /* Right icons stay top */
-  .right-section {
-    margin-left: auto;
-    gap: 14px;
-  }
-
-  /* Search moves to next line */
   .wow-search {
     order: 3;
     width: 100%;
     max-width: 100%;
-    margin-top: 8px;
-  }
-
-  .wow-search input {
-    padding: 10px;
-    font-size: 14px;
-  }
-
-  .wow-search button {
-    padding: 0 14px;
-    font-size: 16px;
-  }
-
-  /* Cart */
-  .cart-icon svg {
-    width: 22px;
-    height: 22px;
-  }
-
-  .cart-badge {
-    font-size: 10px;
-    min-width: 16px;
-    height: 16px;
-  }
-}
-
-/* EXTRA SMALL DEVICES */
-@media (max-width: 480px) {
-
-  .wow-logo img {
-    height: 98px;
   }
 
   .right-section {
-    gap: 10px;
-  }
-
-  .wow-search input {
-    font-size: 13px;
+    margin-left: auto;
+    gap: 18px;
   }
 }
+
+

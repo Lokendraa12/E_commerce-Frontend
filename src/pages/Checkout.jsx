@@ -3,6 +3,16 @@ import axios from "axios";
 import { CartContext } from "../context/CartContext";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import FakePaymentModal from "./FakePaymentModal";
+
+const style = document.createElement("style");
+style.innerHTML = `
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}`;
+document.head.appendChild(style);
+
 
 export default function Checkout({ onClose }) {
   const { cartItems, clearCart, updateQty, removeFromCart } =
@@ -13,6 +23,10 @@ export default function Checkout({ onClose }) {
   const [loading, setLoading] = useState(false);
   const [successMsg, setSuccessMsg] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("COD");
+  const [showPayment, setShowPayment] = useState(false);
+  const [processingPayment, setProcessingPayment] = useState(false);
+
+
 
    const handlePlaceOrder = () => {
     navigate("/OrderSuccess");
@@ -55,7 +69,9 @@ export default function Checkout({ onClose }) {
   /* 🟢 PLACE ORDER */
   console.log("USER DATA:", user);
   
- const saveOrder = async () => {
+const BASE = process.env.REACT_APP_API_URL;
+
+const saveOrder = async () => {
   if (!address.name || !address.phone || !address.street) {
     alert("Please fill address details");
     return;
@@ -67,38 +83,47 @@ export default function Checkout({ onClose }) {
     return;
   }
 
-  setLoading(true);
+  const orderData = {
+    userId: user.id,
+    items: cartItems.map(item => ({
+      name: item.name,
+      price: item.price,
+      qty: item.qty,
+      image: item.images?.[0] || ""
+    })),
+    address,
+    paymentMethod,
+    deliveryCharge: DELIVERY_CHARGE,
+    totalAmount: finalAmount,
+    paymentStatus: paymentMethod === "COD" ? "Pending" : "Paid",
+  };
 
+  // 🔵 ONLINE PAYMENT → Open Fake QR Modal
+  // 🔵 ONLINE PAYMENT FLOW
+if (paymentMethod === "ONLINE") {
+  setProcessingPayment(true);
+
+  // 4 sec fake processing
+  setTimeout(() => {
+    setProcessingPayment(false);
+    setShowPayment(true);
+  }, 4000);
+
+  return;
+}
+
+
+  // 🟢 COD → Direct Save
   try {
-    const orderData = {
-      userId: user.id,   // ✅ correct id
-      items: cartItems.map(item => ({
-        name: item.name,
-        price: item.price,
-        qty: item.qty,
-        image: item.images?.[0] || ""
-      })),
-      address: address,
-      paymentMethod: paymentMethod,  // ✅ dynamic
-      deliveryCharge: DELIVERY_CHARGE,  // ✅ dynamic
-      totalAmount: finalAmount,
-      paymentStatus: paymentMethod === "COD" ? "Pending" : "Paid",
-    };
+    setLoading(true);
 
-    console.log("SENDING ORDER:", orderData); // 🔎 debug
-
-    const res = await axios.post(
-      "http://localhost:5000/api/orders",
-      orderData
-    );
-
-    console.log("ORDER RESPONSE:", res.data);
+    await axios.post(`${BASE}/orders`, orderData);
 
     clearCart();
     setSuccessMsg("🎉 Order placed successfully!");
 
     setTimeout(() => {
-      navigate("/orders");  // ✅ better redirect
+      navigate("/orders");
     }, 1500);
 
   } catch (error) {
@@ -108,6 +133,42 @@ export default function Checkout({ onClose }) {
 
   setLoading(false);
 };
+
+
+const handlePaymentSuccess = async () => {
+  setShowPayment(false);
+
+  const orderData = {
+    userId: user.id,
+    items: cartItems.map(item => ({
+      name: item.name,
+      price: item.price,
+      qty: item.qty,
+      image: item.images?.[0] || ""
+    })),
+    address,
+    paymentMethod: "ONLINE",
+    deliveryCharge: DELIVERY_CHARGE,
+    totalAmount: finalAmount,
+    paymentStatus: "Paid",
+  };
+
+  try {
+    setLoading(true);
+
+    await axios.post(`${BASE}/orders`, orderData);
+
+    clearCart();
+    navigate("/orders");
+
+  } catch (error) {
+    alert("Payment successful but order failed!");
+  }
+
+  setLoading(false);
+};
+
+
 
 
 
@@ -243,6 +304,25 @@ export default function Checkout({ onClose }) {
           </>
         )}
       </div>
+      {showPayment && (
+  <FakePaymentModal
+    amount={finalAmount}
+    onSuccess={handlePaymentSuccess}
+    onClose={() => setShowPayment(false)}
+  />
+)}
+
+{processingPayment && (
+  <div style={processingOverlay}>
+    <div style={processingBox}>
+      <div style={spinner}></div>
+      <h3>Processing Payment...</h3>
+      <p>Please wait while we connect to bank server</p>
+    </div>
+  </div>
+)}
+
+
     </div>
   );
 }
@@ -366,4 +446,33 @@ const btn = {
   background: "linear-gradient(135deg,#0b327b,#1749b2)",
   color: "#fff",
   cursor: "pointer",
+};
+
+
+const processingOverlay = {
+  position: "fixed",
+  inset: 0,
+  background: "rgba(0,0,0,0.7)",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  zIndex: 10000,
+};
+
+const processingBox = {
+  background: "#fff",
+  padding: 40,
+  borderRadius: 20,
+  textAlign: "center",
+  width: 300,
+};
+
+const spinner = {
+  width: 50,
+  height: 50,
+  border: "5px solid #eee",
+  borderTop: "5px solid #1749b2",
+  borderRadius: "50%",
+  margin: "0 auto 20px",
+  animation: "spin 1s linear infinite",
 };

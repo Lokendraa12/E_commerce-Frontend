@@ -39,13 +39,15 @@ export default function SearchResults() {
       try {
         setLoading(true);
 
+        const BASE = process.env.REACT_APP_API_URL;
+
         const urls = [
-          "http://localhost:5000/api/tshirts",
-          "http://localhost:5000/api/shirts",
-          "http://localhost:5000/api/jeans",
-          "http://localhost:5000/api/trousers",
-          "http://localhost:5000/api/shoes",
-          "http://localhost:5000/api/innerwear",
+          `${BASE}/tshirts`,
+          `${BASE}/shirts`,
+          `${BASE}/jeans`,
+          `${BASE}/trousers`,
+          `${BASE}/shoes`,
+          `${BASE}/innerwear`,
         ];
 
         const responses = await Promise.all(urls.map((u) => axios.get(u)));

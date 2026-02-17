@@ -41,7 +41,7 @@ function AppContent() {
       <div className="app-container">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/products" element={<Products />} />
+          {/* <Route path="/products" element={<Products />} /> */}
           <Route path="/featured" element={<FeaturedProducts />} />
           <Route path="/product/:id" element={<ProductDetails />} />
           <Route path="/Search/:id" element={<ProductDetails />} />

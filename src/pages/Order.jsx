@@ -222,7 +222,8 @@ export default function Orders() {
                             <div
                               style={{
                                 ...styles.progressLine,
-                                width: `${progressWidth}%`,
+                               width: `${Math.min(progressWidth, 100)}%`,
+
                               }}
                             />
                           );
@@ -398,7 +399,8 @@ const styles = {
     top: "20px",
     left: "0",
     height: "4px",
-    background: "#41b245",
+    width: "90px",
+    background: "#1edf28",
     zIndex: 2,
     transition: "0.4s ease",
   },

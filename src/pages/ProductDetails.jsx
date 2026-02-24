@@ -204,7 +204,7 @@ export default function ProductDetails() {
   style={styles.buyBtn}
   onClick={() =>
     handleAuthCheck(() => {
-      
+      addToCart({ ...product, qty, size })
       setShowCheckout(true);
     })
   }

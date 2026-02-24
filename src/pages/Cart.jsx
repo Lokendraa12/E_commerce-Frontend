@@ -9,14 +9,18 @@ export default function Cart() {
     const { cartItems, removeFromCart, updateQty, clearCart } = useContext(CartContext);
     const navigate = useNavigate();
     if (!cartItems || cartItems.length === 0) {
-        return (
-            <div className="cart-empty">
-                <h2>Your Cart is Empty 😔</h2>
-                <p>Add some products to see them here.</p>
-                <Link to="/" className="btn-back">Go Shopping</Link>
+    return (
+        <div className="cart-empty">
+            <div className="empty-box">
+                <div className="empty-icon"><svg xmlns="http://www.w3.org/2000/svg" width={100} height={100} viewBox="0 0 24 24"><g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}><path fill="currentColor" d="M19.5 22a1.5 1.5 0 1 0 0-3a1.5 1.5 0 0 0 0 3m-10 0a1.5 1.5 0 1 0 0-3a1.5 1.5 0 0 0 0 3"></path><path d="M5 4h17l-2 11H7zm0 0c-.167-.667-1-2-3-2m18 13H5.23c-1.784 0-2.73.781-2.73 2s.946 2 2.73 2H19.5"></path></g></svg></div>
+                <h2>Your Cart is Empty</h2>
+                <p>Looks like you haven’t added anything yet.</p>
+                <Link to="/" className="shop-btn">Start Shopping</Link>
             </div>
-        );
-    }
+        </div>
+    );
+}
+
 
     // Calculate total
     const totalPrice = cartItems.reduce((acc, item) => acc + item.price * item.qty, 0);
